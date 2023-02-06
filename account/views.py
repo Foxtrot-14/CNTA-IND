@@ -32,14 +32,14 @@ class LoginView(APIView):
     def post(self, request, format=None):
         serializer = UserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        email = serializer.data.get('email')
+        phone = serializer.data.get('phone')
         password = serializer.data.get('password')
-        user = authenticate(email=email,password=password)
+        user = authenticate(phone=phone,password=password)
         if user is not None:
             token = get_tokens_for_user(user)
             return Response({'token':token, 'msg':'Logged In Successfully'}, status=status.HTTP_200_OK)
         else:
-            return Response({'errors':{'non_field_errors':['Email or Password is not Valid']}}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'errors':{'non_field_errors':['Phone Number or Password is not Valid']}}, status=status.HTTP_404_NOT_FOUND)
 
 class ProfileView(APIView):
     renderer_classes = [UserRenderer]
@@ -56,12 +56,12 @@ class ChangePasswordView(APIView):
         serializer.is_valid(raise_exception=True)
         return Response({'msg':'Password Changed Successfully'}, status=status.HTTP_200_OK)
     
-class PasswordResetEmailView(APIView):
+class PasswordResetPhoneView(APIView):
     renderer_classes = [UserRenderer]
     def post(self,request,format=None):
-        serializer = PasswordResetEmailSerializer(data=request.data)
+        serializer = PasswordResetPhoneSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response({'msg':'Password Reset link sent check Email'}, status=status.HTTP_200_OK)
+        return Response({'msg':'Password Reset link sent as sms check Phone'}, status=status.HTTP_200_OK)
 
 class UserPasswordResetView(APIView):
     renderer_classes = [UserRenderer]

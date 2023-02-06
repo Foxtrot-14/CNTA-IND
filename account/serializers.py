@@ -9,7 +9,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
     class Meta:
         model = User
-        fields = ['email','name','team_name','password','password2']
+        fields = ['phone','name','type','password','password2']
         extra_kwargs={
             'password':{'write_only':True}
         }
@@ -26,15 +26,15 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return User.objects.create_user(**validated_data)
     
 class UserLoginSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(max_length=255)
+    phone = serializers.CharField()
     class Meta:
         model = User
-        fields = ['email','password']
+        fields = ['phone','password']
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id','email','name']
+        fields = ['id','phone','name']
 
 class UserChangePasswordSerializer(serializers.Serializer):
     password = serializers.CharField(max_length=225, style={'input_type':'password'}, write_only=True)
@@ -52,15 +52,15 @@ class UserChangePasswordSerializer(serializers.Serializer):
         user.save() 
         return attrs    
     
-class PasswordResetEmailSerializer(serializers.Serializer):
-    email = serializers.EmailField(max_length=255)
+class PasswordResetPhoneSerializer(serializers.Serializer):
+    phone = serializers.CharField()
     class Meta:
-        fields = ['email']
+        fields = ['phone']
     
     def validate(self, attrs):
-        email = attrs.get('email')
-        if User.objects.filter(email=email).exists():
-            user = User.objects.get(email=email)
+        phone = attrs.get('phone')
+        if User.objects.filter(phone=phone).exists():
+            user = User.objects.get(phone=phone)
             #encoding the uid to makesure it is not displayed in the url
             #encoding function takes bytes input so using force bytescto convert
             uid = urlsafe_base64_encode(force_bytes(user.id))
