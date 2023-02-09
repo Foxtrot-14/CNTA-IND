@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate
 from account.renderers import *
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+import random
 # Create your views here.
 
 def get_tokens_for_user(user):
@@ -21,11 +22,20 @@ class RegistrationView(APIView):
     renderer_classes = [UserRenderer]
     def post(self, request, format=None):
         serializer = UserRegistrationSerializer(data=request.data)
+        otp = random.randint(1000,9999)
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
+        user = serializer.save(otp=otp)
         token = get_tokens_for_user(user)
         return Response({'token':token, 'msg':'Registration Successfull'}, status=status.HTTP_201_CREATED)
-
+    
+class OtpVerificationView(APIView):
+    renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
+    def post(self, request, format=None):
+        serializer = OtpVerificationSerializer(data=request.data, context={'user':request.user})
+        serializer.is_valid(raise_exception=True)
+        return Response({'msg':'Phone Number Verified'}, status=status.HTTP_200_OK)
+        
 class LoginView(APIView):
     #to serve errors to the frontend
     renderer_classes = [UserRenderer]

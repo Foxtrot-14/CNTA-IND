@@ -10,7 +10,7 @@ USER_TYPE = (
     (5,"Crew"),
 )
 class UserManager(BaseUserManager):
-    def create_user(self, phone, name, type, password=None, password2=None):
+    def create_user(self, phone, name, type, otp, is_verified=False, password=None, password2=None):
         """
         Creates and saves a User with the given email, name, team_name and password.
         """
@@ -21,13 +21,15 @@ class UserManager(BaseUserManager):
             phone=phone,
             name=name,
             type=type,
+            otp=otp,
+            is_verified=is_verified,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phone, type, name, password=None):
+    def create_superuser(self, phone, type,name, password=None):
         """
         Creates and saves a superuser with the given email, name,teamname and password.
         """
@@ -49,6 +51,8 @@ class User(AbstractBaseUser):
     )
     name = models.CharField(max_length=20)
     type = models.IntegerField(choices=USER_TYPE)
+    otp = models.IntegerField(default=1234)
+    is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

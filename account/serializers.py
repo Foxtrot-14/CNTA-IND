@@ -9,7 +9,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
     class Meta:
         model = User
-        fields = ['phone','name','type','password','password2']
+        fields = ['phone','name','type','password','password2','otp']
         extra_kwargs={
             'password':{'write_only':True}
         }
@@ -24,6 +24,20 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
       
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
+
+class OtpVerificationSerializer(serializers.Serializer):
+    otp = serializers.IntegerField(write_only=True)
+    class Meta:
+        model = User
+        fields = ['otp','is_verified']
+    def validate(self, attrs):
+        otp = attrs.get('otp')
+        user = self.context.get('user')
+        if user.otp != otp:
+            raise serializers.ValidationError('Invalid OTP')
+        user.is_verified = True
+        user.save()
+        return attrs      
     
 class UserLoginSerializer(serializers.ModelSerializer):
     phone = serializers.CharField()
