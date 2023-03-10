@@ -17,15 +17,15 @@ class Navbar extends Component {
         <h1 className="navbar-logo">CNTA</h1>
 
         <div className="menu-icons" onClick={ this.handleClick }>
-            { this.state.clicked ? <RxCross2 /> : <AiOutlineMenu /> }
+          { this.state.clicked ? <RxCross2 /> : <AiOutlineMenu /> }
         </div>
 
         <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
-            <Link to="/" className="nav-links"><AiFillHome className="nav-icons"/>Home</Link>
-            <Link to="/about" className="nav-links"><RxPerson className="nav-icons"/>About Us</Link>
-            <Link to="/contact" className="nav-links"><FiMessageCircle className="nav-icons"/>Contact Us</Link>
-            <button>Log In</button>
-            <button>Sign Up</button>
+          <Link to="/" className="nav-links"><AiFillHome className="nav-icons"/>Home</Link>
+          <Link to="/about" className="nav-links"><RxPerson className="nav-icons"/>About Us</Link>
+          <Link to="/contact" className="nav-links"><FiMessageCircle className="nav-icons"/>Contact Us</Link>
+          <button>Log In</button>
+          <button>Sign Up</button>
         </ul>
       </nav>
     );
