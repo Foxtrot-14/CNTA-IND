@@ -20,3 +20,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# https://towardsdatascience.com/build-a-blog-website-using-django-rest-framework-posts-app-part-3-7334f75983fc

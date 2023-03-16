@@ -6,8 +6,7 @@ USER_TYPE = (
     (1,"Parent"),
     (2,"Teacher"),
     (3,"NRC"),
-    (4,"Institute"),
-    (5,"Crew"),
+    (4,"Crew"),
 )
 class UserManager(BaseUserManager):
     def create_user(self, phone, name, type, otp, is_verified=False, password=None, password2=None):

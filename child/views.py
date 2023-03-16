@@ -5,10 +5,19 @@ from rest_framework.views import APIView
 from account.serializers import *
 from account.renderers import *
 from rest_framework.permissions import IsAuthenticated
+from .serializers import *
  
-class TestView(APIView):
+class AddChildView(APIView):
+    renderer_classes = [UserRenderer]
+    #permission_classes = [IsAuthenticated]
+    def post(self,request, format=None):
+        serializer = AddChildSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'msg':'Child Added Successfully'},status=status.HTTP_200_OK)
+    
+class ViewChild(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
     def get(self,request):
-        return Response({'msg':'welcome'},status=status.HTTP_200_OK)
-    
+        pass    

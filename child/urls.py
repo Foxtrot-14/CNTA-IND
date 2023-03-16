@@ -1,5 +1,6 @@
 from django.urls import path
 from child.views import *
 urlpatterns = [
-    path('test/', TestView.as_view(),name='test'),
+    path('child/', AddChildView.as_view(),name='childadd'),
+    path('child-<pk>', ViewChild.as_view(),name='child'),
 ]
