@@ -7,13 +7,13 @@ CHILD_GENDER = (
     (1,"Female"),
 )
 CHILD_STATUS = (
-    (1, 'Normal')
-    (2, 'Reported')
-    (3, 'Checked')
+    (1, "Normal"),
+    (2, "Reported"),
+    (3, "Checked"),
 )
 
 class Child(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True)
+    id = models.AutoField(primary_key=True)
     #avatar = models.ImageField(_(""), upload_to=None, height_field=None, width_field=None, max_length=None)
     name  = models.CharField(max_length=50)
     age = models.IntegerField()
@@ -32,8 +32,8 @@ class Child(models.Model):
     msclwstng = models.BooleanField()
     stntng = models.BooleanField()
     fngr_dete = models.BooleanField()
-    addder = models.ForeignKey(User, on_delete=models.SET_NULL)
-    referred_to = models.ForeignKey(User, on_delete=models.SET_NULL)
+    adder = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='added_by')
+    referred_to = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='reffered_to')
     diagnosis = models.CharField(max_length=50, default="Normal")
     status = models.IntegerField(default=1, choices=CHILD_STATUS)
     
