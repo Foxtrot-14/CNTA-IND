@@ -49,6 +49,7 @@ class User(AbstractBaseUser):
         max_length=15,
         unique=True,
     )
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     type = models.IntegerField(choices=USER_TYPE)
     otp = models.IntegerField(default=1234)

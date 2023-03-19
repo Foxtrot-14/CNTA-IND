@@ -13,15 +13,12 @@ class AddChildView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        posts = Child.objects.all()
+        posts = Child.objects.filter(adder=request.user)
         serializer = ChildSerializer(posts, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
-        data=request.data
-        adder = User.objects.filter(id=request.user.id).filter()
-        data['adder']=adder
-        serializer = ChildSerializer(data = data)
+        serializer = ChildSerializer(data = request.data, context={'user':request.user})
         if serializer.is_valid():
             serializer.save()
             return Response({'msg':'Child added'}, status = status.HTTP_201_CREATED)
