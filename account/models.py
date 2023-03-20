@@ -9,7 +9,7 @@ USER_TYPE = (
     (4,"Crew"),
 )
 class UserManager(BaseUserManager):
-    def create_user(self, phone, name, type, otp, is_verified=False, password=None, password2=None):
+    def create_user(self, phone, name, type, otp, city, is_verified=False, password=None, password2=None):
         """
         Creates and saves a User with the given email, name, team_name and password.
         """
@@ -21,6 +21,7 @@ class UserManager(BaseUserManager):
             name=name,
             type=type,
             otp=otp,
+            city=city,
             is_verified=is_verified,
         )
 
@@ -52,6 +53,7 @@ class User(AbstractBaseUser):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     type = models.IntegerField(choices=USER_TYPE)
+    city = models.CharField(max_length=20)
     otp = models.IntegerField(default=1234)
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)

@@ -32,6 +32,7 @@ class Child(models.Model):
     msclwstng = models.BooleanField()
     stntng = models.BooleanField()
     fngr_dete = models.BooleanField()
+    city = models.CharField(max_length=50)
     adder = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='added_by')
     referred_to = models.ForeignKey(User, on_delete=models.SET_NULL,null=True, related_name='reffered_to')
     diagnosis = models.CharField(max_length=50, default="Normal")
