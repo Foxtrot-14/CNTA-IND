@@ -24,8 +24,8 @@ class Navbar extends Component {
           <Link to="/" className="nav-links"><AiFillHome className="nav-icons"/>Home</Link>
           <Link to="/about" className="nav-links"><RxPerson className="nav-icons"/>About Us</Link>
           <Link to="/contact" className="nav-links"><FiMessageCircle className="nav-icons"/>Contact Us</Link>
-          <button>Log In</button>
-          <button>Sign Up</button>
+          <Link to="/login"><button>Log In</button></Link>
+          <Link to="/signup"><button>Sign Up</button></Link>
         </ul>
       </nav>
     );
