@@ -13,8 +13,8 @@ function Home() {
             heroImg={A}
             title="Lorem ipsum dolor sit amet."
             text="Lorem ipsum dolor sit amet consectetur adipisicing elit."
-            buttonText="Get Started"
-            url="/"
+            buttonText="Get Started"	 
+            url="/signup"
             btnClass="show"
             />
             <Content />

@@ -1,9 +1,9 @@
-.form-container {
+.add {
     margin: 4rem 6rem;
-    color: #2a2a2a
+    color: #2a2a2a;
 }
 
-.form-container form {
+.add form {
     padding-top: 3rem;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
     margin: auto;
 }
 
-.form-container input {
+.add input {
     height: 3rem;
     padding: 0 1rem;
     margin-bottom: 2rem;
@@ -19,23 +19,25 @@
     border: 1px solid #2a2a2a
 }
 
-.form-container textarea {
+.add textarea {
     padding: 1rem;
     margin-bottom: 2rem;
     border-radius: 0.3rem;
     border: 1px solid #2a2a2a;
 }
 
-.form-container button{
+.add button{
     display: inline;
+    padding: 0.7rem;
+    margin-bottom: 0.8rem;
 }
 
 @media screen and (max-width: 850px){
-    .form-container {
+    .add {
         margin: 4rem 2rem;
     }
 
-    .form-container form {
+    .add form {
         padding-top: 3rem;
         width: 90%;
     }
