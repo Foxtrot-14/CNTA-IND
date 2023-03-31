@@ -75,6 +75,7 @@ class PasswordResetPhoneView(APIView):
 
 class UserPasswordResetView(APIView):
     renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
     def post(self,request,uid,token,format=None):
         serializer = UserPasswordResetSerializer(data=request.data, context={'uid':uid,'token':token})
         serializer.is_valid(raise_exception=True)       
