@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup"
+import ViewProfile from "./components/ViewProfile";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/welcome" element={<AfterLogin />} />
         <Route path="/addprofile" element={<AddProfile />} />
+        <Route path="/viewprofile" element={<ViewProfile />} />
       </Routes>
     </div>
   );
