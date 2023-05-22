@@ -1,0 +1,40 @@
+.login-form {
+  margin: 4rem 6rem;
+  color: #2a2a2a;
+  box-sizing: border-box;
+}
+
+.login-form form {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: auto;
+}
+.login-form h1 {
+  padding: 0.5rem;
+}
+.login-form input {
+  height: 3rem;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+  border-radius: 0.3rem;
+  border: 1px solid #2a2a2a;
+}
+
+.login-form button {
+  display: inline;
+  padding: 0.7rem;
+  margin-bottom: 0.8rem;
+}
+
+@media screen and (max-width: 850px) {
+  .login-form {
+    margin: 4rem 2rem;
+  }
+
+  .login-form form {
+    padding-top: 3rem;
+    width: 90%;
+  }
+}
