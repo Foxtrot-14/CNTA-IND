@@ -4,12 +4,11 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 # Create your models here.
 USER_TYPE = (
     (1,"Parent"),
-    (2,"Teacher"),
     (3,"NRC"),
     (4,"Crew"),
 )
 class UserManager(BaseUserManager):
-    def create_user(self, phone, name, type, otp, city, is_verified=False, password=None, password2=None):
+    def create_user(self, phone, name, type, otp, city='bangalore', is_verified=False, password=None, password2=None):
         """
         Creates and saves a User with the given email, name, team_name and password.
         """
@@ -55,7 +54,7 @@ class User(AbstractBaseUser):
     type = models.IntegerField(choices=USER_TYPE)
     city = models.CharField(max_length=20)
     otp = models.IntegerField(default=1234)
-    is_verified = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

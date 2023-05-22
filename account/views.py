@@ -12,10 +12,12 @@ import random
 def get_tokens_for_user(user):
     #generating token manually
     refresh = RefreshToken.for_user(user)
+    print(user.type, 'asd')
 
     return {
         'refresh': str(refresh),
         'access': str(refresh.access_token),
+        'type': str(user.type)
     }
 class RegistrationView(APIView):
     #to server errors to the frontend
@@ -27,14 +29,13 @@ class RegistrationView(APIView):
         user = serializer.save(otp=otp)
         token = get_tokens_for_user(user)
         return Response({'token':token, 'msg':'Registration Successfull'}, status=status.HTTP_201_CREATED)
-    
-class OtpVerificationView(APIView):
+
+class TestView(APIView):
     renderer_classes = [UserRenderer]
-    permission_classes = [IsAuthenticated]
-    def post(self, request, format=None):
-        serializer = OtpVerificationSerializer(data=request.data, context={'user':request.user})
-        serializer.is_valid(raise_exception=True)
-        return Response({'msg':'Phone Number Verified'}, status=status.HTTP_200_OK)
+    #permission_classes = [IsAuthenticated]
+    def get(self, request, format=None):
+        
+        return Response({'msg':'hello'}, status=status.HTTP_200_OK)
         
 class LoginView(APIView):
     #to serve errors to the frontend
@@ -58,25 +59,4 @@ class ProfileView(APIView):
         serializer = UserProfileSerializer(request.user)
         return Response(serializer.data,status=status.HTTP_200_OK)
 
-class ChangePasswordView(APIView):
-    renderer_classes = [UserRenderer]
-    permission_classes = [IsAuthenticated]
-    def post(self,request,format=None):
-        serializer = UserChangePasswordSerializer(data=request.data, context={'user':request.user})
-        serializer.is_valid(raise_exception=True)
-        return Response({'msg':'Password Changed Successfully'}, status=status.HTTP_200_OK)
-    
-class PasswordResetPhoneView(APIView):
-    renderer_classes = [UserRenderer]
-    def post(self,request,format=None):
-        serializer = PasswordResetPhoneSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response({'msg':'Password Reset link sent as sms check Phone'}, status=status.HTTP_200_OK)
 
-class UserPasswordResetView(APIView):
-    renderer_classes = [UserRenderer]
-    permission_classes = [IsAuthenticated]
-    def post(self,request,uid,token,format=None):
-        serializer = UserPasswordResetSerializer(data=request.data, context={'uid':uid,'token':token})
-        serializer.is_valid(raise_exception=True)       
-        return Response({'msg':'Password Reset Successfully'}, status=status.HTTP_200_OK)

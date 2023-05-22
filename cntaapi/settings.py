@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pbl-0$yfy1g0mn(^ij018mcofxj*$3w9j$f5vd&yw5mo_2w8q)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', 'https://cnta-main-vmk2p.ondigitalocean.app',]
 
 
 # Application definition
@@ -141,8 +141,8 @@ AUTH_USER_MODEL='account.User'
 
 #JWT
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),
-    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1000),
+    'REFRESH_TOKEN_LIFETIME': timedelta(minutes=1000),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
     'UPDATE_LAST_LOGIN': False,
@@ -174,5 +174,11 @@ CORS_ALLOWED_ORIGINS = [
     #"https://example.com",
     #"https://sub.example.com",
     "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3001",
     "http://127.0.0.1:3000",
+    "http://localhost"
+    
 ]
+CORS_ORIGIN_ALLOW_ALL = True
+STATIC_ROOT = BASE_DIR / "staticfiles"
