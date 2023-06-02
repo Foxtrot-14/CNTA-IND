@@ -6,7 +6,6 @@ from account.serializers import *
 from account.renderers import *
 from rest_framework.permissions import IsAuthenticated
 from .serializers import *
-from account.models import User
 
 class AddChildView(APIView):
     renderer_classes = [UserRenderer]
@@ -27,6 +26,7 @@ class AddChildView(APIView):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 class ChildDetailAPIView(APIView):
+    renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):

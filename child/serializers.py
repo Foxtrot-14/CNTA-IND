@@ -1,9 +1,7 @@
-from xml.dom import ValidationErr
 from rest_framework import serializers
 from .models import Child
 from account.models import User
 import pickle
-import os
 
 class ChildSerializer(serializers.ModelSerializer):
     adder = serializers.ReadOnlyField(source = 'user.username')
