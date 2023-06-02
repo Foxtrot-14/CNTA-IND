@@ -17,10 +17,12 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         password = attrs.get('password')
         password2 = attrs.get('password2')
-        
+        type = attrs.get('type')
         if password != password2:
-            raise serializers.ValidationError('Passwords do not match') 
-        return attrs  
+            raise serializers.ValidationError('Passwords do not match')
+        if type == 3:
+            raise serializers.ValidationError('You are not allowed to register as an admin') 
+        return attrs
       
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)

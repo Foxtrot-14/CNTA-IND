@@ -4,8 +4,8 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 # Create your models here.
 USER_TYPE = (
     (1,"Parent"),
-    (3,"NRC"),
-    (4,"Crew"),
+    (2,"NRC"),
+    (3,"Crew"),
 )
 class UserManager(BaseUserManager):
     def create_user(self, phone, name, type, otp, city='bangalore', is_verified=False, password=None, password2=None):
@@ -28,15 +28,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phone, type, name, otp=0000, password=None):
-        """
-        Creates and saves a superuser with the given email, name,teamname and password.
-        """
+    def create_superuser(self, phone, name, otp=0000, password=None):
         user = self.create_user(
             phone,
             password=password,
             name=name,
-            type=type,
+            type=3,
             otp=otp,
         )
         user.is_admin = True

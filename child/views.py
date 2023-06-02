@@ -11,9 +11,11 @@ from account.models import User
 class AddChildView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
-
     def get(self, request, *args, **kwargs):
-        posts = Child.objects.filter(adder=request.user)
+        if request.user.type==1:
+            posts = Child.objects.filter(adder=request.user)
+        elif request.user.type==2:
+            posts = Child.objects.filter(referred_to=request.user)
         serializer = ChildSerializer(posts, many = True)
         return Response(serializer.data, status = status.HTTP_200_OK)
 
