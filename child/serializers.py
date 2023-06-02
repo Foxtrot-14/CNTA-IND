@@ -26,7 +26,7 @@ class ChildSerializer(serializers.ModelSerializer):
             status=2
         if(prediction[0]==0):
             prediction='Moderate Malnutrition'
-            attrs['reffered_to']=User.objects.get(type=2)
+            attrs['referred_to']=User.objects.get(type=2)
         elif(prediction[0]==1):
             prediction='Normal'
         else:
