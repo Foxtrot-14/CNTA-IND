@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-pbl-0$yfy1g0mn(^ij018mcofxj*$3w9j$f5vd&yw5mo_2w8q)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'https://cnta-main-vmk2p.ondigitalocean.app',]
+ALLOWED_HOSTS = ['cnta-api.azurewebsites.net']
 
 
 # Application definition
@@ -159,15 +159,16 @@ SIMPLE_JWT = {
 #time is in seconds 5min = 5*60=300
 PASSWORD_RESET_TIMEOUT=300
 #CORS POLICY ERROR
-CORS_ALLOWED_ORIGINS = [
-    #"https://example.com",
-    #"https://sub.example.com",
-    "http://localhost:3000",
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3000",
-    "http://localhost"
+# CORS_ALLOWED_ORIGINS = [
+#     #"https://example.com",
+#     #"https://sub.example.com",
+#     "http://localhost:3000",
+#     "http://localhost:3000",
+#     "http://localhost:3001",
+#     "http://127.0.0.1:3000",
+#     "http://localhost"
     
-]
+# ]
 CORS_ORIGIN_ALLOW_ALL = True
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'

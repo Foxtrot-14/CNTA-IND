@@ -28,7 +28,6 @@ class AddChildView(APIView):
 class ChildDetailAPIView(APIView):
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
-
     def get_object(self, pk):
         try:
             return Child.objects.get(pk = pk)

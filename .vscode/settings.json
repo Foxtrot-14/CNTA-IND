@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/5b2a36bf-f102-4809-803f-0f922146481e/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/cnta-api",
+    "appService.deploySubpath": "."
+}
